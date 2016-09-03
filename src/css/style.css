@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.test {
+  color: green;
+  font-size: 40px;
+}
+
+.data-name {
+    font-family: 'Arimo', sans-serif;
+}
