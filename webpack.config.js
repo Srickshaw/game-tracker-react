@@ -21,7 +21,7 @@ module.exports = {
 
   entry: [
 		'webpack/hot/only-dev-server',
-    './index.js'
+    './index.jsx'
 	],
 
   output: {
