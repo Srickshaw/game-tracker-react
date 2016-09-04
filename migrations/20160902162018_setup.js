@@ -5,9 +5,10 @@ exports.up = function(knex, Promise) {
 			table.increments('id').primary();
 			table.string('game_name');
 			table.string('game_system');
+			table.boolean('finished');
 			table.timestamps();
 		})
-	])  
+	])
 };
 
 exports.down = function(knex, Promise) {

@@ -36,6 +36,7 @@ app.post('/games', function(req, res) {
 	gamesTest.forge({
 		game_name: req.body.gameName,
 		game_system: req.body.gameSystem,
+		finished: req.body.finished,
 		created_at: new Date,
 		updated_at: new Date
 	})

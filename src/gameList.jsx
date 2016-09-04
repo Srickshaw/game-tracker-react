@@ -3,6 +3,21 @@ import React from 'react';
 export default class GameList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { cssClasses: '' };
+    this.prettifyStatus = this.prettifyStatus.bind(this);
+  }
+
+  prettifyStatus() {
+    if(!this.props.status) {
+      this.setState({ cssClasses: "finished finished-f" });
+    }
+    else {
+      this.setState({ cssClasses: "finished finished-t" });
+    }
+  }
+
+  componentDidMount() {
+    this.prettifyStatus();
   }
 
   removeGame(gameData){
@@ -19,9 +34,11 @@ export default class GameList extends React.Component {
 
   render() {
     return(
-      <div>
-        <h1 className="data-name">Name: {this.props.name} System: {this.props.system}</h1>
-      </div>
+        <div className="data-name">
+          <p>Name: {this.props.name}</p>
+          <p>System: {this.props.system}</p>
+          <p>Finished: <span className={this.state.cssClasses}></span></p>
+        </div>
     )
   }
 }

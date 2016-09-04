@@ -1,5 +1,5 @@
 import React from 'react';
-import AddGame from './addGame';
+import AddGame from './addGame.jsx';
 import './css/style.css';
 
 export default class HelloWorld extends React.Component {
@@ -14,10 +14,9 @@ export default class HelloWorld extends React.Component {
   getAll() {
     $.ajax({
       url: '/games',
-      success: function(gameData) {
+      success: (gameData) => {
         this.setState({data: gameData.data});
-        console.log(this.state.data);
-      }.bind(this)
+      }
     });
   }
 
@@ -28,13 +27,11 @@ export default class HelloWorld extends React.Component {
       type: 'POST',
       data: gameData,
       dataType: 'json',
-      success: function(data) {
+      success: (data) => {
         console.log(data);
         this.setState({data: data.data});
-        console.log(this.state.data);
-      }.bind(this)
+      }
     })
-    console.log("Add game called");
   }
 
   componentDidMount() {
@@ -44,9 +41,9 @@ export default class HelloWorld extends React.Component {
 
   render() {
     return(
-      <div>
+      <section>
         <AddGame data={this.state.data} onAddSubmit={this.addGame} />
-      </div>
+      </section>
     )
   }
 }

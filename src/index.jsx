@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import GameTracker from './gameTracker';
+import GameTracker from './gameTracker.jsx';
 
 render(
   <GameTracker />,
