@@ -55,8 +55,9 @@ app.put('/games/:id', function(req, res) {
   .fetch({ require: true })
   .then(function(game) {
     game.save({
-      game_name: req.body.testName || game.get('test_name'),
-      game_system: req.body.testSystem || game.get('test_system'),
+      game_name: req.body.gameName || game.get('game_name'),
+      game_system: req.body.gameSystem || game.get('game_system'),
+			finished: req.body.finished || game.get('finished'),
       updated_at: new Date
     })
     .then(res.json({success: true}))
