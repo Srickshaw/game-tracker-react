@@ -1,4 +1,4 @@
-Currently, this is a *very* WIP version of a game tracker (similar to The Backloggery) that was originally going to be built in Angular 1.5, but I decided to switch to React (mainly to get some chops in it). In doing so, I cleaned up my routes and changed up some behavior. Right now, everything pretty much runs in a development environment, as its far from production quality. This is set up to use both a Webpack sever (to handle Babelizing and hot module loading)
+Currently, this is a *very* WIP version of a game tracker (similar to The Backloggery) that was originally going to be built in Angular 1.5, but I decided to switch to React (mainly to get some chops in it). In doing so, I cleaned up my routes and changed up some behavior. Right now, everything pretty much runs in a development environment, as its far from production quality. This is set up to use both a Webpack sever (to handle Babelizing and hot module loading) and a Node/Express server (to handle a REST API).
 
 To get a local copy up and running, it takes a few more steps beyond just simply running `npm install` and `npm start`:
 
