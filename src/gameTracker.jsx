@@ -35,7 +35,7 @@ export default class GameTracker extends React.Component {
 
   componentDidMount() {
     this.getAll();
-    setInterval(this.getAll, 5000);
+    setInterval(this.getAll, 3000);
   }
 
   render() {

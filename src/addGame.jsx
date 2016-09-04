@@ -9,6 +9,7 @@ export default class AddGame extends React.Component {
     this.keepGameSystemValueState = this.keepGameSystemValueState.bind(this);
     this.keepFinishedState = this.keepFinishedState.bind(this);
     this.addGame = this.addGame.bind(this);
+		this.onRemove = this.onRemove.bind(this);
   }
 
   keepGameValueState(e) {
@@ -32,17 +33,34 @@ export default class AddGame extends React.Component {
     this.setState({ gameName: '', gameSystem: '' });
   }
 
+	onRemove(gameData) {
+    $.ajax({
+      url: '/games/' + gameData,
+      type: 'DELETE',
+      data: gameData,
+      success: (data) => {
+        console.log(data);
+      }
+    })
+  }
 
   render() {
     let childNodes = this.props.data.map((child) => {
       return(
-        <GameList key={child.id} name={child.game_name} system={child.game_system} gameID={child.id} status={child.finished} />
+        <GameList
+				  key={child.id}
+          name={child.game_name}
+          system={child.game_system}
+          removeGame={this.onRemove}
+          status={child.finished}
+					gameID={child.id}
+        />
       )
     })
 
     return(
       <section className="add-game-form">
-        <h2>Add Game</h2>
+        <h1>Add Game</h1>
         <form onSubmit={this.addGame}>
           <input
             type="text"
@@ -71,6 +89,7 @@ export default class AddGame extends React.Component {
           />
         </form>
         <section className="games-list">
+					<h1>Game List</h1>
           {childNodes}
         </section>
       </section>

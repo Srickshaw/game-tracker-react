@@ -5,6 +5,7 @@ export default class GameList extends React.Component {
     super(props);
     this.state = { cssClasses: '' };
     this.prettifyStatus = this.prettifyStatus.bind(this);
+    this.removeGame = this.removeGame.bind(this);
   }
 
   prettifyStatus() {
@@ -20,16 +21,8 @@ export default class GameList extends React.Component {
     this.prettifyStatus();
   }
 
-  removeGame(gameData){
-      // $.ajax({
-      //   url: '/games' + gameData.id,
-      //   type: 'DELETE',
-      //   data: gameData,
-      //   success: function(data) {
-      //     this.setState({data: data.data});
-      //   }.bind(this)
-      // })
-    console.log(gameData.id);
+  removeGame(){
+      this.props.removeGame(this.props.gameID);
   }
 
   render() {
@@ -38,6 +31,7 @@ export default class GameList extends React.Component {
         <p>Name: {this.props.name}</p>
         <p>System: {this.props.system}</p>
         <p>Finished: <span className={this.state.cssClasses}></span></p>
+        <button onClick={this.removeGame}>Remove Game</button>
       </div>
     )
   }
