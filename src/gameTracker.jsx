@@ -2,11 +2,11 @@ import React from 'react';
 import AddGame from './addGame.jsx';
 import './css/style.css';
 
-export default class HelloWorld extends React.Component {
+export default class GameTracker extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {data: []};
+    this.state = { data: [] };
     this.addGame = this.addGame.bind(this);
     this.getAll = this.getAll.bind(this);
   }
@@ -21,7 +21,6 @@ export default class HelloWorld extends React.Component {
   }
 
   addGame(gameData) {
-    console.log(gameData);
     $.ajax({
       url: '/games',
       type: 'POST',

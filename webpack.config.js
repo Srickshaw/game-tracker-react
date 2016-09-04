@@ -20,13 +20,13 @@ module.exports = {
   },
 
   entry: [
-		'webpack/hot/only-dev-server',
+    'webpack/hot/only-dev-server',
     './index.jsx'
-	],
+  ],
 
   output: {
     path: __dirname + '/dist',
-		publicPath: 'http://localhost:8080/assets/',
+    publicPath: 'http://localhost:8080/assets/',
     filename: 'bundle.js'
   },
 

@@ -29,16 +29,16 @@ export default class GameList extends React.Component {
       //     this.setState({data: data.data});
       //   }.bind(this)
       // })
-      console.log(gameData.id);
+    console.log(gameData.id);
   }
 
   render() {
     return(
-        <div className="data-name">
-          <p>Name: {this.props.name}</p>
-          <p>System: {this.props.system}</p>
-          <p>Finished: <span className={this.state.cssClasses}></span></p>
-        </div>
+      <div className="data-name">
+        <p>Name: {this.props.name}</p>
+        <p>System: {this.props.system}</p>
+        <p>Finished: <span className={this.state.cssClasses}></span></p>
+      </div>
     )
   }
 }
