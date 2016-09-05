@@ -51,12 +51,12 @@ export default class AddGame extends React.Component {
     let childNodes = this.props.data.map((child) => {
       return(
         <GameList
-				  key={child.id}
+          key={child.id}
           name={child.game_name}
           system={child.game_system}
           removeGame={this.onRemove}
           status={child.finished}
-					gameID={child.id}
+          gameID={child.id}
         />
       )
     })
@@ -92,7 +92,7 @@ export default class AddGame extends React.Component {
           />
         </form>
         <section className="games-list">
-					<h1>Game List</h1>
+          <h1>Game List</h1>
           {childNodes}
         </section>
       </section>
