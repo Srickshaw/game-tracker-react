@@ -34,11 +34,7 @@ export default class AddGame extends React.Component {
     this.setState({ gameName: '', gameSystem: '' });
   }
 
-	componentDidMount() {
-		console.log(this.props.data);
-	}
-
-	onRemove(gameData) {
+  onRemove(gameData) {
     fetch('/games/' + gameData, {
       method: 'DELETE',
       body: gameData
@@ -46,7 +42,7 @@ export default class AddGame extends React.Component {
     .then((response) => {
       return response.json()
     })
-		.then((json) => {
+    .then((json) => {
       console.log(json);
     })
   }
