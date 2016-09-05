@@ -10,7 +10,7 @@ export default class AddGame extends React.Component {
     this.keepGameSystemValueState = this.keepGameSystemValueState.bind(this);
     this.keepFinishedState = this.keepFinishedState.bind(this);
     this.addGame = this.addGame.bind(this);
-		this.onRemove = this.onRemove.bind(this);
+    this.onRemove = this.onRemove.bind(this);
   }
 
   keepGameValueState(e) {
