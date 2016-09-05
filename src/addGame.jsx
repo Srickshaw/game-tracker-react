@@ -1,4 +1,5 @@
 import React from 'react';
+import 'whatwg-fetch';
 import GameList from './gameList.jsx';
 
 export default class AddGame extends React.Component {
@@ -33,14 +34,20 @@ export default class AddGame extends React.Component {
     this.setState({ gameName: '', gameSystem: '' });
   }
 
+	componentDidMount() {
+		console.log(this.props.data);
+	}
+
 	onRemove(gameData) {
-    $.ajax({
-      url: '/games/' + gameData,
-      type: 'DELETE',
-      data: gameData,
-      success: (data) => {
-        console.log(data);
-      }
+    fetch('/games/' + gameData, {
+      method: 'DELETE',
+      body: gameData
+    })
+    .then((response) => {
+      return response.json()
+    })
+		.then((json) => {
+      console.log(json);
     })
   }
 

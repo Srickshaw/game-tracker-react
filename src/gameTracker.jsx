@@ -1,5 +1,6 @@
 import React from 'react';
 import AddGame from './addGame.jsx';
+import 'whatwg-fetch';
 import './css/style.css';
 
 export default class GameTracker extends React.Component {
@@ -12,24 +13,28 @@ export default class GameTracker extends React.Component {
   }
 
   getAll() {
-    $.ajax({
-      url: '/games',
-      success: (gameData) => {
-        this.setState({data: gameData.data});
-      }
-    });
+    fetch('/games')
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      this.setState({ data: json.data })
+    })
   }
 
   addGame(gameData) {
-    $.ajax({
-      url: '/games',
-      type: 'POST',
-      data: gameData,
-      dataType: 'json',
-      success: (data) => {
-        console.log(data);
-        this.setState({data: data.data});
-      }
+    fetch('/games', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(gameData)
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      this.setState({ data: json.data })
     })
   }
 

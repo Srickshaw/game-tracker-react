@@ -17,7 +17,7 @@ var gamesTest = bookshelf.Model.extend({
 
 app.use(express.static('dist'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + "/index.html");
@@ -32,7 +32,6 @@ app.get('/games', function(req, res) {
 });
 
 app.post('/games', function(req, res) {
-  console.log(req.body.gameName);
   gamesTest.forge({
     game_name: req.body.gameName,
     game_system: req.body.gameSystem,

@@ -20,6 +20,7 @@ module.exports = {
   },
 
   entry: [
+		'whatwg-fetch',
     'webpack/hot/only-dev-server',
     './index.jsx'
   ],
