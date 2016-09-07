@@ -1,38 +1,58 @@
 import React from 'react';
+import 'whatwg-fetch';
+import IndividualGame from './individualGame.jsx'
 
 export default class GameList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cssClasses: '' };
-    this.prettifyStatus = this.prettifyStatus.bind(this);
-    this.removeGame = this.removeGame.bind(this);
+    this.state = { data: [] };
+    this.getAll = this.getAll.bind(this);
+    this.onRemove = this.onRemove.bind(this);
   }
 
-  prettifyStatus() {
-    if(!this.props.status) {
-      this.setState({ cssClasses: "finished finished-f" });
-    }
-    else {
-      this.setState({ cssClasses: "finished finished-t" });
-    }
+  getAll() {
+    fetch('/games')
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      this.setState({ data: json.data })
+    })
   }
 
   componentDidMount() {
-    this.prettifyStatus();
+    this.getAll();
   }
 
-  removeGame(){
-      this.props.removeGame(this.props.gameID);
+  onRemove(gameData) {
+    fetch('/games/' + gameData, {
+      method: 'DELETE',
+      body: gameData
+    })
+    .then(() => {
+      this.getAll();
+    })
   }
 
   render() {
+    let childNodes = this.state.data.map((child) => {
+      return(
+        <IndividualGame
+          key={child.id}
+          name={child.game_name}
+          system={child.game_system}
+          removeGame={this.onRemove}
+          status={child.finished}
+          gameID={child.id}
+        />
+      )
+    })
+
     return(
-      <div className="data-name">
-        <p>Name: {this.props.name}</p>
-        <p>System: {this.props.system}</p>
-        <p>Finished: <span className={this.state.cssClasses}></span></p>
-        <button onClick={this.removeGame}>Remove Game</button>
-      </div>
+      <section className="games-list">
+        <h1>Game List</h1>
+        {childNodes}
+      </section>
     )
   }
 }

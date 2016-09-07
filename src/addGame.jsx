@@ -1,6 +1,5 @@
 import React from 'react';
 import 'whatwg-fetch';
-import GameList from './gameList.jsx';
 
 export default class AddGame extends React.Component {
   constructor(props) {
@@ -10,7 +9,7 @@ export default class AddGame extends React.Component {
     this.keepGameSystemValueState = this.keepGameSystemValueState.bind(this);
     this.keepFinishedState = this.keepFinishedState.bind(this);
     this.addGame = this.addGame.bind(this);
-    this.onRemove = this.onRemove.bind(this);
+		this.addGameSubmit = this.addGameSubmit.bind(this);
   }
 
   keepGameValueState(e) {
@@ -25,46 +24,36 @@ export default class AddGame extends React.Component {
     this.setState({ finished: e.target.value });
   }
 
-  addGame(e) {
+	addGame(gameData) {
+    fetch('/games', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(gameData)
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      this.setState({ data: json.data })
+    })
+  }
+
+  addGameSubmit(e) {
     e.preventDefault();
     const gameName = this.state.gameName.trim();
     const gameSystem = this.state.gameSystem.trim();
     const finished = this.state.finished;
-    this.props.onAddSubmit({ gameName: gameName, gameSystem: gameSystem, finished: finished });
+    this.addGame({ gameName: gameName, gameSystem: gameSystem, finished: finished });
     this.setState({ gameName: '', gameSystem: '' });
   }
 
-  onRemove(gameData) {
-    fetch('/games/' + gameData, {
-      method: 'DELETE',
-      body: gameData
-    })
-    .then((response) => {
-      return response.json()
-    })
-    .then((json) => {
-      console.log(json);
-    })
-  }
-
   render() {
-    let childNodes = this.props.data.map((child) => {
-      return(
-        <GameList
-          key={child.id}
-          name={child.game_name}
-          system={child.game_system}
-          removeGame={this.onRemove}
-          status={child.finished}
-          gameID={child.id}
-        />
-      )
-    })
-
     return(
       <section className="add-game-form">
         <h1>Add Game</h1>
-        <form onSubmit={this.addGame}>
+        <form onSubmit={this.addGameSubmit}>
           <input
             type="text"
             placeholder="Game Name"
@@ -91,10 +80,6 @@ export default class AddGame extends React.Component {
             value="Add Game"
           />
         </form>
-        <section className="games-list">
-          <h1>Game List</h1>
-          {childNodes}
-        </section>
       </section>
     )
   }

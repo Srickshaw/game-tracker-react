@@ -68,7 +68,11 @@ app.delete('/games/:id', function(req, res) {
   .fetch({ require: true })
   .then(function(testItem) {
     testItem.destroy()
-    .then(res.json({success: true}));
+    .then(  gamesTest.forge()
+	    .fetchAll()
+	    .then(function(games) {
+	      res.json({data: games.toJSON()})
+	    }));
   })
 });
 
