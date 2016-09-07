@@ -9,7 +9,7 @@ export default class AddGame extends React.Component {
     this.keepGameSystemValueState = this.keepGameSystemValueState.bind(this);
     this.keepFinishedState = this.keepFinishedState.bind(this);
     this.addGame = this.addGame.bind(this);
-		this.addGameSubmit = this.addGameSubmit.bind(this);
+    this.addGameSubmit = this.addGameSubmit.bind(this);
   }
 
 	static contextTypes = {
@@ -28,7 +28,7 @@ export default class AddGame extends React.Component {
     this.setState({ finished: e.target.value });
   }
 
-	addGame(gameData) {
+  addGame(gameData) {
     fetch('/games', {
       headers: {
         'Content-Type': 'application/json'
