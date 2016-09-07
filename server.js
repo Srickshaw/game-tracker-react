@@ -40,13 +40,7 @@ app.post('/games', function(req, res) {
     updated_at: new Date
   })
   .save()
-  .then(
-    gamesTest.forge()
-    .fetchAll()
-    .then(function(games) {
-      res.json({data: games.toJSON()})
-    })
-  )
+  .then(res.json({addSuccess: true}))
 });
 
 app.put('/games/:id', function(req, res) {

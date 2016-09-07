@@ -12,6 +12,10 @@ export default class AddGame extends React.Component {
 		this.addGameSubmit = this.addGameSubmit.bind(this);
   }
 
+	static contextTypes = {
+	  router: React.PropTypes.object.isRequired
+	}
+
   keepGameValueState(e) {
     this.setState({ gameName: e.target.value });
   }
@@ -36,7 +40,7 @@ export default class AddGame extends React.Component {
       return response.json();
     })
     .then((json) => {
-      this.setState({ data: json.data })
+      console.log(json);
     })
   }
 
@@ -47,6 +51,7 @@ export default class AddGame extends React.Component {
     const finished = this.state.finished;
     this.addGame({ gameName: gameName, gameSystem: gameSystem, finished: finished });
     this.setState({ gameName: '', gameSystem: '' });
+		this.context.router.push('/games');
   }
 
   render() {
